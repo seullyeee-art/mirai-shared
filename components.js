@@ -221,7 +221,9 @@ ${NAV_ITEMS.map(it => {
   const isActive = it.key === active;
   const iconBody = isActive && it.activeIcon ? it.activeIcon : it.icon;
   /* guest: 마이페이지 탭은 로그인 액션으로 */
-  const href = (guest && it.key === 'mypage') ? '#' : it.href;
+  /* cross-repo 호환을 위해 mirai-home 외부에서도 절대 경로로 변환 */
+  const resolvedHref = (it.href === '#') ? '#' : miraiHomeLink(null, it.href);
+  const href = (guest && it.key === 'mypage') ? '#' : resolvedHref;
   const dataAttr = (guest && it.key === 'mypage') ? ' data-action="login"' : '';
   return `  <a href="${href}" class="mobile-bottom-nav-item${isActive ? ' active' : ''}" aria-label="${it.label}"${dataAttr}>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${iconBody}</svg>
