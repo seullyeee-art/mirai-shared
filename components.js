@@ -7,26 +7,40 @@
    페이지별 이미지 경로는 data-image-base 속성으로 override 가능
    ═══════════════════════════════════════════════════════════ */
 
-/* 페이지 위치에 따라 mirai-home의 이미지/링크 베이스 경로 결정 */
+/* 페이지 위치에 따라 mirai-home의 이미지/링크 베이스 경로 결정
+   file://, http:// 모두 대응 — mirai-home 안이면 '.', 그 외 형제 폴더면 '../mirai-home' */
 function miraiBase(el){
   const ds = el?.dataset?.imageBase;
   if (ds) return ds.replace(/\/$/, '');
-  const path = location.pathname;
-  if (/\/mirai-home\//.test(path)) return '.';
-  if (/\/mirai-ui\/mirai-[^/]+\//.test(path)) return '../mirai-home';
-  return '.';
+  return /\/mirai-home\//.test(location.pathname) ? '.' : '../mirai-home';
 }
+
+/* 비로그인 상태 감지: ?guest=1 또는 localStorage('mirai.guest')='1' */
+function isGuest(){
+  try {
+    const p = new URLSearchParams(location.search);
+    if (p.has('guest')) {
+      const v = p.get('guest') === '1';
+      localStorage.setItem('mirai.guest', v ? '1' : '0');
+      return v;
+    }
+    return localStorage.getItem('mirai.guest') === '1';
+  } catch(e){ return false; }
+}
+/* guest 상태일 때 body에 .guest 클래스 부여 (CSS 분기용) */
+(function applyGuestClass(){
+  const apply = () => {
+    if (isGuest()) document.body.classList.add('guest');
+    else document.body.classList.remove('guest');
+  };
+  if (document.body) apply();
+  else document.addEventListener('DOMContentLoaded', apply);
+})();
 function miraiHomeLink(el, file){
-  const path = location.pathname;
-  if (/\/mirai-home\//.test(path)) return file;
-  if (/\/mirai-ui\/mirai-[^/]+\//.test(path)) return `../mirai-home/${file}`;
-  return file;
+  return /\/mirai-home\//.test(location.pathname) ? file : `../mirai-home/${file}`;
 }
 function miraiStoreLink(el){
-  const path = location.pathname;
-  if (/\/mirai-store-v2\//.test(path)) return 'index.html';
-  if (/\/mirai-ui\/mirai-[^/]+\//.test(path)) return '../mirai-store-v2/index.html';
-  return '../mirai-store-v2/index.html';
+  return /\/mirai-store-v2\//.test(location.pathname) ? 'index.html' : '../mirai-store-v2/index.html';
 }
 
 function buildHeader(el){
@@ -168,6 +182,9 @@ function buildHeader(el){
         <img class="mir-icon" src="${base}/images/main/mir.png" alt="미르">
         <span class="mir-discount-badge">25%</span>
       </a>
+      ${isGuest() ? `
+      <a href="#" class="header-login-btn" data-action="login">로그인</a>
+      ` : `
       <a href="${mypage}" class="avatar" role="button" aria-label="프로필">
         <svg viewBox="0 0 36 36">
           <rect width="36" height="36" fill="#fce7f3"/>
@@ -175,6 +192,7 @@ function buildHeader(el){
           <ellipse cx="18" cy="32" rx="14" ry="10" fill="#f9a8d4"/>
         </svg>
       </a>
+      `}
     </div>
   </div>
 </header>
@@ -196,18 +214,32 @@ const NAV_ITEMS = [
 ];
 
 function buildBottomNav(active = 'home') {
+  const guest = isGuest();
   return `
 <nav class="mobile-bottom-nav" aria-label="모바일 네비게이션">
 ${NAV_ITEMS.map(it => {
   const isActive = it.key === active;
   const iconBody = isActive && it.activeIcon ? it.activeIcon : it.icon;
-  return `  <a href="${it.href}" class="mobile-bottom-nav-item${isActive ? ' active' : ''}" aria-label="${it.label}">
+  /* guest: 마이페이지 탭은 로그인 액션으로 */
+  const href = (guest && it.key === 'mypage') ? '#' : it.href;
+  const dataAttr = (guest && it.key === 'mypage') ? ' data-action="login"' : '';
+  return `  <a href="${href}" class="mobile-bottom-nav-item${isActive ? ' active' : ''}" aria-label="${it.label}"${dataAttr}>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${iconBody}</svg>
   </a>`;
 }).join('\n')}
 </nav>
 `;
 }
+
+/* 로그인 액션 — 로그인 상태로 전환 (prototype: 즉시 토글) */
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-action="login"]');
+  if (btn) {
+    e.preventDefault();
+    try { localStorage.setItem('mirai.guest', '0'); } catch(err){}
+    location.reload();
+  }
+});
 
 function toggleSidebar(){
   const app = document.querySelector('.app');
@@ -316,7 +348,13 @@ function buildSidebar(el, active = 'home'){
       <span>${it.label}</span>
     </a>`;
   }).join('');
-  const chats = SIDEBAR_CHATS.map(c => `
+  const guest = isGuest();
+  const chats = guest ? `
+    <div class="sidebar-chats-empty">
+      <p class="sidebar-chats-empty-text">로그인 후<br>대화 기록을 확인하세요</p>
+      <a href="#" class="sidebar-login-btn" data-action="login">로그인 / 회원가입</a>
+    </div>
+  ` : SIDEBAR_CHATS.map(c => `
     <a href="#" class="chat-item">
       <div class="chat-avatar"><img src="${base}/images/main/${c.img}" alt=""></div>
       <div class="chat-info">
@@ -340,22 +378,22 @@ function buildSidebar(el, active = 'home'){
 </div>
 <div class="sidebar-section">${nav}</div>
 <div class="sidebar-chats" aria-label="최근 대화">
-  <a href="#" class="sidebar-chats-header" aria-label="전체 대화 보기">
+  ${guest ? '' : `<a href="#" class="sidebar-chats-header" aria-label="전체 대화 보기">
     <span class="sidebar-chats-title">최근 대화</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="9 18 15 12 9 6"/>
     </svg>
-  </a>
+  </a>`}
   <div class="sidebar-chats-list">${chats}</div>
 </div>
 <div class="sidebar-footer">
-  <a href="${settings}" class="sidebar-nav-item" data-tooltip="설정">
+  ${guest ? `` : `<a href="${settings}" class="sidebar-nav-item" data-tooltip="설정">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="3"/>
       <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
     </svg>
     <span>설정</span>
-  </a>
+  </a>`}
 </div>
 `;
 }

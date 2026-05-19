@@ -261,6 +261,45 @@ a{color:inherit;text-decoration:none}
 .app.sidebar-collapsed .sidebar-nav-item > span{display:none}
 .app.sidebar-collapsed .sidebar-chats{display:none}
 .app.sidebar-collapsed .sidebar-footer{align-items:center}
+
+/* ═══ GUEST 상태 (비로그인) ═══ */
+.header-login-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:36px;padding:0 16px;
+  border-radius:999px;
+  background:var(--primary-normal);
+  color:#fff;
+  font-size:14px;font-weight:600;letter-spacing:-0.002em;
+  text-decoration:none;
+  transition:background 0.15s ease;
+  flex-shrink:0;
+}
+.header-login-btn:hover{background:var(--primary-strong)}
+
+/* 사이드바 최근대화 자리 — guest 빈 상태 */
+.sidebar-chats-empty{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:24px 16px;
+  text-align:center;
+}
+.sidebar-chats-empty-text{
+  font-size:13px;font-weight:500;line-height:1.5;
+  color:var(--label-alternative);
+  letter-spacing:0.0145em;
+}
+.sidebar-login-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:100%;height:40px;padding:0 14px;
+  border-radius:10px;
+  background:var(--primary-normal);
+  color:#fff;
+  font-size:13px;font-weight:600;letter-spacing:-0.002em;
+  text-decoration:none;
+  transition:background 0.15s ease;
+}
+.sidebar-login-btn:hover{background:var(--primary-strong)}
+/* 간소화 모드: 툴팁이 사이드바 밖으로 나갈 수 있게 overflow 허용 (chats는 어차피 display:none) */
+.app.sidebar-collapsed .sidebar{overflow:visible}
 /* 간소화 모드 툴팁 */
 .app.sidebar-collapsed .sidebar-nav-item[data-tooltip]:hover::after{
   content:attr(data-tooltip);
@@ -284,7 +323,7 @@ a{color:inherit;text-decoration:none}
 }
 .header-sidebar-toggle:hover{background:var(--fill-alternative)}
 .header-sidebar-toggle svg{width:22px;height:22px}
-.app.sidebar-collapsed .header-sidebar-toggle{display:flex}
+/* 간소화 모드에서도 헤더 햄버거는 숨김 (사이드바 안 토글만 사용) */
 
 /* ═══ HEADER (GNB) ═══ */
 .header{
@@ -498,7 +537,7 @@ a{color:inherit;text-decoration:none}
 @media (max-width:768px){
   /* 사이드바 숨김, 1컬럼 (collapsed 상태와 무관) */
   .app,
-  .app.sidebar-collapsed{grid-template-columns:1fr}
+  .app.sidebar-collapsed{grid-template-columns:minmax(0, 1fr)}
   .sidebar{display:none}
   .app{min-width:0}
 
