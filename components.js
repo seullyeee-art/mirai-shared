@@ -66,7 +66,7 @@ function buildHeader(el){
         <img class="mir-icon" src="${base}/images/main/mir.png" alt="미르">
         <span class="mir-discount-badge">25%</span>
       </a>
-      <button class="header-mobile-icon" aria-label="검색">
+      <button class="header-mobile-icon" aria-label="검색" onclick="document.body.classList.add('search-open'); setTimeout(() => document.querySelector('.search input')?.focus(), 50)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="7"/>
           <path d="m21 21-4.35-4.35"/>
@@ -74,6 +74,9 @@ function buildHeader(el){
       </button>
     </div>
     <div class="header-trailing" aria-label="데스크탑 헤더">
+      <button class="search-mobile-close" type="button" aria-label="검색 닫기" onclick="document.body.classList.remove('search-open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
       <div class="search">
         <svg class="search-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="8" cy="8" r="5.5"/>
@@ -88,27 +91,27 @@ function buildHeader(el){
               <button class="search-section-clear" type="button">전체 삭제</button>
             </div>
             <div class="search-recent">
-              <button class="search-recent-item" type="button">
+              <div class="search-recent-item" role="button" tabindex="0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
                 <span>회귀 로맨스</span>
                 <button class="search-recent-remove" type="button" aria-label="삭제">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
                 </button>
-              </button>
-              <button class="search-recent-item" type="button">
+              </div>
+              <div class="search-recent-item" role="button" tabindex="0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
                 <span>학원물</span>
                 <button class="search-recent-remove" type="button" aria-label="삭제">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
                 </button>
-              </button>
-              <button class="search-recent-item" type="button">
+              </div>
+              <div class="search-recent-item" role="button" tabindex="0">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
                 <span>일진</span>
                 <button class="search-recent-remove" type="button" aria-label="삭제">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M6 18L18 6"/></svg>
                 </button>
-              </button>
+              </div>
             </div>
           </div>
 
