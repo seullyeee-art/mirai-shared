@@ -171,17 +171,23 @@ a{color:inherit;text-decoration:none}
 .sidebar-pass-banner{
   position:relative;display:flex;align-items:center;
   margin:8px 0 4px;height:52px;border-radius:8px;overflow:hidden;
-  background:linear-gradient(90deg,#3F4BC9 0%,#5B5FD6 48%,#8E83E6 100%);
+  background:#6E6AE0;
   text-decoration:none;
 }
-.sidebar-pass-text{display:flex;flex-direction:column;gap:2px;padding:0 13px;position:relative;z-index:1}
+/* 텍스트 가독성용 좌측 다크 스크림 (PNG 위, 텍스트 아래) */
+.sidebar-pass-banner::before{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg, rgba(34,24,74,0.92) 0%, rgba(34,24,74,0.5) 44%, rgba(34,24,74,0) 72%);
+}
+.sidebar-pass-text{display:flex;flex-direction:column;gap:2px;padding:0 13px;position:relative;z-index:2}
 .sidebar-pass-l1{font-size:13px;font-weight:600;color:#fff;letter-spacing:0.0145em;white-space:nowrap}
 .sidebar-pass-l2{
   font-size:13px;font-weight:600;letter-spacing:0.0145em;white-space:nowrap;
   background:linear-gradient(104deg,#D7D5FF 16%,#FFCBEA 59%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.sidebar-pass-img{position:absolute;right:0;top:50%;transform:translateY(-50%);height:58px;width:auto;object-fit:contain;pointer-events:none}
+/* PNG를 배너 전체 배경으로 (자체 그라디언트가 유일한 bg → seam 없음) */
+.sidebar-pass-img{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:right center;pointer-events:none}
 .sidebar-footer{
   margin-top:auto;
   display:flex;flex-direction:column;gap:2px;
