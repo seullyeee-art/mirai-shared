@@ -112,7 +112,7 @@ a{color:inherit;text-decoration:none}
   flex:1;
 }
 .sidebar-logo img{
-  height:28px;width:auto;
+  height:26px;width:auto;
   display:block;
 }
 .sidebar-section{
@@ -120,19 +120,19 @@ a{color:inherit;text-decoration:none}
   margin-bottom:8px;
 }
 .sidebar-section-title{
-  font-size:12px;font-weight:600;line-height:1.334;
+  font-size:11px;font-weight:600;line-height:1.334;
   letter-spacing:0.0252em;
   color:var(--label-alternative);
   text-transform:uppercase;
-  padding:8px 12px;
+  padding:6px 12px;
   margin-top:4px;
 }
 .sidebar-nav-item{
   display:flex;align-items:center;gap:8px;
-  height:48px;padding:0 12px;
-  border-radius:12px;
+  height:44px;padding:0 11px;
+  border-radius:11px;
   color:var(--label-normal);
-  font-size:15px;font-weight:500;line-height:1.467;
+  font-size:14px;font-weight:500;line-height:1.467;
   letter-spacing:0.0096em;
   transition:background 0.15s ease, color 0.15s ease;
   cursor:pointer;
@@ -144,7 +144,7 @@ a{color:inherit;text-decoration:none}
   font-weight:600;
 }
 .sidebar-nav-item svg{
-  width:24px;height:24px;flex-shrink:0;
+  width:22px;height:22px;flex-shrink:0;
   color:var(--label-neutral);
 }
 .sidebar-nav-item.active svg{color:var(--label-strong)}
@@ -152,15 +152,15 @@ a{color:inherit;text-decoration:none}
 
 /* MIMG 메뉴 (그라데이션) */
 .sidebar-mimg{gap:8px}
-.sidebar-mimg-mark{width:24px;height:24px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center}
-.sidebar-mimg-mark svg{width:24px;height:24px}
+.sidebar-mimg-mark{width:22px;height:22px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center}
+.sidebar-mimg-mark svg{width:22px;height:22px}
 .sidebar-mimg-text{
-  font-size:15px;font-weight:600;letter-spacing:0.0096em;
+  font-size:14px;font-weight:600;letter-spacing:0.0096em;
   background:linear-gradient(117deg,#14C391 19%,#0FB9B1 92%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .sidebar-mimg-badge{
-  font-size:11px;font-weight:600;line-height:1.27;letter-spacing:0.031em;
+  font-size:10px;font-weight:600;line-height:1.27;letter-spacing:0.031em;
   padding:2px 6px;border-radius:6px;
   background:rgba(20,195,145,0.10);
   background-clip:padding-box;
@@ -170,18 +170,18 @@ a{color:inherit;text-decoration:none}
 /* 패스권 구독 배너 */
 .sidebar-pass-banner{
   position:relative;display:flex;align-items:center;
-  margin:8px 0 4px;height:57px;border-radius:8px;overflow:hidden;
-  background:linear-gradient(90deg,#3868D2 0%,#3868D2 42%,#C3C8E7 62%,#C3C8E7 100%);
+  margin:8px 0 4px;height:52px;border-radius:8px;overflow:hidden;
+  background:linear-gradient(90deg,#3F4BC9 0%,#5B5FD6 48%,#8E83E6 100%);
   text-decoration:none;
 }
-.sidebar-pass-text{display:flex;flex-direction:column;gap:2px;padding:0 14px;position:relative;z-index:1}
-.sidebar-pass-l1{font-size:14px;font-weight:600;color:#fff;letter-spacing:0.0145em;white-space:nowrap}
+.sidebar-pass-text{display:flex;flex-direction:column;gap:2px;padding:0 13px;position:relative;z-index:1}
+.sidebar-pass-l1{font-size:13px;font-weight:600;color:#fff;letter-spacing:0.0145em;white-space:nowrap}
 .sidebar-pass-l2{
-  font-size:14px;font-weight:600;letter-spacing:0.0145em;white-space:nowrap;
-  background:linear-gradient(104deg,#C1C1FF 16%,#FFCBEA 59%);
+  font-size:13px;font-weight:600;letter-spacing:0.0145em;white-space:nowrap;
+  background:linear-gradient(104deg,#D7D5FF 16%,#FFCBEA 59%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-.sidebar-pass-img{position:absolute;right:0;top:50%;transform:translateY(-50%);height:64px;width:auto;object-fit:contain;pointer-events:none}
+.sidebar-pass-img{position:absolute;right:0;top:50%;transform:translateY(-50%);height:58px;width:auto;object-fit:contain;pointer-events:none}
 .sidebar-footer{
   margin-top:auto;
   display:flex;flex-direction:column;gap:2px;
@@ -198,7 +198,7 @@ a{color:inherit;text-decoration:none}
 }
 .sidebar-chats-header{
   display:flex;align-items:center;gap:6px;
-  padding:6px 12px 10px;
+  padding:6px 12px 8px;
   color:var(--label-normal);
   text-decoration:none;
   transition:opacity 0.15s ease;
@@ -206,12 +206,12 @@ a{color:inherit;text-decoration:none}
 }
 .sidebar-chats-header:hover{opacity:0.7}
 .sidebar-chats-title{
-  font-size:14px;font-weight:500;line-height:1.429;
+  font-size:13px;font-weight:500;line-height:1.429;
   color:var(--label-normal);
   letter-spacing:0.0145em;
 }
 .sidebar-chats-header svg{
-  width:18px;height:18px;
+  width:16px;height:16px;
   color:var(--label-normal);
   flex-shrink:0;
 }
@@ -225,8 +225,8 @@ a{color:inherit;text-decoration:none}
 .sidebar-chats-list::-webkit-scrollbar-track{background:transparent}
 .sidebar-chats-list::-webkit-scrollbar-thumb{background:var(--fill-normal);border-radius:3px}
 .chat-item{
-  display:flex;align-items:center;gap:11px;
-  padding:9px 12px;
+  display:flex;align-items:center;gap:10px;
+  padding:8px 11px;
   border-radius:10px;
   cursor:pointer;
   transition:background 0.15s ease;
@@ -234,7 +234,7 @@ a{color:inherit;text-decoration:none}
 .chat-item:hover{background:var(--fill-alternative)}
 .chat-item.active{background:var(--fill-alternative)}
 .chat-avatar{
-  width:40px;height:40px;
+  width:36px;height:36px;
   border-radius:50%;
   overflow:hidden;
   flex-shrink:0;
@@ -246,22 +246,22 @@ a{color:inherit;text-decoration:none}
 }
 .chat-info{
   min-width:0;flex:1;
-  display:flex;flex-direction:column;gap:4px;
+  display:flex;flex-direction:column;gap:3px;
 }
 .chat-name{
-  font-size:14px;font-weight:600;
+  font-size:13px;font-weight:600;
   color:var(--label-normal);
   letter-spacing:0.0145em;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .chat-preview{
-  font-size:13px;font-weight:400;
+  font-size:12px;font-weight:400;
   color:var(--label-alternative);
   letter-spacing:0.0145em;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .chat-time{
-  font-size:12px;font-weight:500;
+  font-size:11px;font-weight:500;
   color:var(--label-assistive);
   flex-shrink:0;
   margin-top:2px;
