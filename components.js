@@ -45,7 +45,7 @@ function miraiStoreLink(el){
 
 function buildHeader(el){
   const base = miraiBase(el);
-  const home = miraiHomeLink(el, 'index.html');
+  const home = miraiHomeLink(el, 'home-revamp.html');
   const mypage = miraiHomeLink(el, 'mypage.html');
   const store = miraiStoreLink(el);
   return `
@@ -203,7 +203,7 @@ function buildHeader(el){
 }
 
 const NAV_ITEMS = [
-  { key: 'home', href: 'index.html', label: '탐색',
+  { key: 'home', href: 'home-revamp.html', label: '탐색',
     icon: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" stroke="none"/>',
     activeIcon: '<circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="#fff" stroke="none"/>' },
   { key: 'history', href: 'history.html', label: '기록',
@@ -311,7 +311,7 @@ customElements.define('mirai-header', MiraiHeader);
 
 /* ═══ <mirai-sidebar> ═══ */
 const SIDEBAR_NAV = [
-  { key: 'home', label: '탐색', href: ['mirai-home', 'index.html'],
+  { key: 'home', label: '탐색', href: ['mirai-home', 'home-revamp.html'],
     icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <g> <g> <path d="M13.4999 12.0002C13.4999 12.8286 12.8283 13.5002 11.9999 13.5002C11.1715 13.5002 10.4999 12.8286 10.4999 12.0002C10.4999 11.1718 11.1715 10.5002 11.9999 10.5002C12.8283 10.5002 13.4999 11.1718 13.4999 12.0002Z" fill="currentColor"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M2.1001 11.9996C2.1001 6.53199 6.53247 2.09961 12.0001 2.09961C17.4677 2.09961 21.9001 6.53199 21.9001 11.9996C21.9001 17.4672 17.4677 21.8996 12.0001 21.8996C6.53247 21.8996 2.1001 17.4672 2.1001 11.9996ZM9.90921 9.67656C9.82093 9.74255 9.7426 9.82088 9.67662 9.90915C9.59558 10.0176 9.54316 10.1373 9.53001 10.1674L9.52753 10.173L7.36833 14.9232C7.30989 15.0516 7.24411 15.1962 7.20011 15.3205L7.19889 15.3239C7.16411 15.422 7.05438 15.7316 7.16226 16.0796C7.27452 16.4417 7.55806 16.7253 7.92021 16.8375C8.26823 16.9454 8.57775 16.8357 8.67588 16.8009L8.67932 16.7997C8.80355 16.7557 8.94812 16.6899 9.07658 16.6315L13.8268 14.4723L13.8324 14.4698C13.8624 14.4566 13.9822 14.4042 14.0906 14.3232C14.1789 14.2572 14.2572 14.1788 14.3232 14.0906C14.4043 13.9822 14.4567 13.8624 14.4698 13.8323L14.4723 13.8267L16.6315 9.07659C16.6899 8.94813 16.7557 8.80353 16.7997 8.6793L16.8009 8.67586C16.8357 8.57773 16.9454 8.26821 16.8375 7.92019C16.7253 7.55805 16.4417 7.2745 16.0796 7.16225C15.7316 7.05437 15.4221 7.16409 15.3239 7.19888L15.3205 7.2001C15.1962 7.24409 15.0517 7.30987 14.9232 7.36831L10.1731 9.52747L10.1674 9.52996C10.1374 9.5431 10.0176 9.59552 9.90921 9.67656Z" fill="currentColor"/> </g> </g> </svg>` },
   { key: 'create', label: '만들기', href: ['mirai-home', '#'],
     icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <g> <g> <path d="M12.8999 7.9999C12.8999 7.50285 12.497 7.0999 11.9999 7.0999C11.5029 7.0999 11.0999 7.50285 11.0999 7.9999V11.0999H7.99996C7.5029 11.0999 7.09996 11.5028 7.09996 11.9999C7.09996 12.497 7.5029 12.8999 7.99996 12.8999H11.0999V15.9999C11.0999 16.497 11.5029 16.8999 11.9999 16.8999C12.497 16.8999 12.8999 16.497 12.8999 15.9999V12.8999H15.9999C16.497 12.8999 16.8999 12.497 16.8999 11.9999C16.8999 11.5028 16.497 11.0999 15.9999 11.0999H12.8999V7.9999Z" fill="currentColor"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9999 2.1C6.53231 2.1 2.09995 6.53238 2.09995 12C2.09995 17.4676 6.53231 21.9 11.9999 21.9C17.4675 21.9 21.8999 17.4676 21.8999 12C21.8999 6.53238 17.4675 2.1 11.9999 2.1ZM3.89994 12C3.89994 7.52649 7.52642 3.9 11.9999 3.9C16.4734 3.9 20.0999 7.52649 20.0999 12C20.0999 16.4735 16.4734 20.1 11.9999 20.1C7.52642 20.1 3.89994 16.4735 3.89994 12Z" fill="currentColor"/> </g> </g> </svg>` },
@@ -345,7 +345,7 @@ function resolveSidebarHref(el, target){
 
 function buildSidebar(el, active = 'home'){
   const base = miraiBase(el);
-  const home = miraiHomeLink(el, 'index.html');
+  const home = miraiHomeLink(el, 'home-revamp.html');
   const settings = miraiHomeLink(el, 'settings.html');
   const history = miraiHomeLink(el, 'history.html');
   const imageStudio = miraiHomeLink(el, '#');
