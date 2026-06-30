@@ -154,6 +154,8 @@ a{color:inherit;text-decoration:none}
 .sidebar-mimg{gap:8px}
 .sidebar-mimg-mark{width:22px;height:22px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center}
 .sidebar-mimg-mark svg{width:22px;height:22px}
+/* 그라디언트 임시 제거 — CSS fill로 단색 강제(SVG fill 속성 덮어씀) */
+.sidebar-mimg-mark svg path{fill:var(--label-neutral)}
 .sidebar-mimg-text{
   font-size:14px;font-weight:600;letter-spacing:0.0096em;
   color:var(--label-normal);
